@@ -21,8 +21,9 @@ import javax.swing.table.DefaultTableModel;
 public class bus  extends Main{
 	private JTextField fplaka;
 	private JTextField fkoltuk;
-	private JButton btnNewButton;
+	//private JButton btnNewButton;
 	private JPanel panel;
+	private JButton btnOtobsKaldr;
 	private DefaultTableModel model;
 	
 	private JTable table;
@@ -61,15 +62,15 @@ public class bus  extends Main{
 		panel.add(fkoltuk);
 		fkoltuk.setColumns(10);
 		
-		btnNewButton = new JButton("Otobüs Ekle");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnOtobsKaldr = new JButton("Otobüs Ekle");
+		btnOtobsKaldr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				insert();
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(10, 370, 410, 60);
-		panel.add(btnNewButton);
+		btnOtobsKaldr.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnOtobsKaldr.setBounds(10, 370, 410, 60);
+		panel.add(btnOtobsKaldr);
 		
 		
 		scrollPane = new JScrollPane();
@@ -130,6 +131,7 @@ public class bus  extends Main{
 				}
 			}
 		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -153,7 +155,7 @@ public class bus  extends Main{
 		try {
 			Statement mystat = conn();
 			rs = mystat.executeQuery("select * from busticket.buses");
-			while(rs.next()){
+			for(int i = 0; rs.next();i++) {
 				Object[] obj = new Object[3];
 				obj[0] = rs.getInt("idbuses");
 				obj[1] = rs.getString("busPlate");

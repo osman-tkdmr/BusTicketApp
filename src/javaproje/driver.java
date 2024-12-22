@@ -174,7 +174,7 @@ public class driver extends Main{
 			Statement mystat = conn();
 			mystat.executeUpdate("insert into busticket.driver values(null, '"+fdriverName.getText()+"','"+fdriverTel.getText()+"')");
 			yenile();
-			JOptionPane.showMessageDialog(null, "Şoför Eklendi", "", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Sefer Eklendi", "", JOptionPane.PLAIN_MESSAGE);
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();

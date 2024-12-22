@@ -53,7 +53,7 @@ public class user extends Main{
 						cTarget.addItem(targets.getString("target"));
 					targets.close();
 				}catch (Exception e1) {
-					System.out.println("hata");
+					
 				}
 			}
 		});
@@ -69,7 +69,7 @@ public class user extends Main{
 					dates.close();
 				
 				}catch (Exception e1) {
-					System.out.println("hata");
+					
 				}
 			}
 		});
@@ -86,7 +86,7 @@ public class user extends Main{
 					times.close();
 				
 				}catch (Exception e1) {
-					System.out.println("hata");
+					
 				}
 			}
 		});
@@ -163,7 +163,6 @@ public class user extends Main{
 		cTime.setBounds(109, 305, 200, 30);
 		cTime.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel.add(cTime);
-		
 		try {
 			comboAction();
 		} catch (SQLException e2) {
@@ -203,15 +202,15 @@ public class user extends Main{
 		
 		
 		JButton btnNewButton = new JButton("Bilet İptal");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(440, 370, 430, 60);
-		panel.add(btnNewButton);
-		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				delete();
 			}
 		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.setBounds(440, 370, 430, 60);
+		panel.add(btnNewButton);
+		
 		
 
 	}
@@ -241,7 +240,7 @@ public class user extends Main{
 		try {
 			Statement mystat = conn();
 			rs = mystat.executeQuery("select * from busticket.customers, busticket.departures where busticket.customers.iddepartures = busticket.departures.iddepartures");
-			while(rs.next()) {
+			for(int i = 0; rs.next();i++) {
 				Object[] obj = new Object[10];
 				obj[0] = rs.getInt("idcustomers");
 				obj[1] = rs.getString("cusName");

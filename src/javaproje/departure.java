@@ -53,10 +53,8 @@ public class departure extends Main{
 		ResultSet rs;
 		try {
 			Statement mystat = conn();
-			rs = mystat.executeQuery("select * from busticket.departures, busticket.buses, busticket.driver" +
-									"where busticket.departures.idbuses = busticket.buses.idbuses "+
-									"and busticket.departures.iddriver = busticket.driver.iddriver");
-			while (rs.next()) {
+			rs = mystat.executeQuery("select * from busticket.departures, busticket.buses, busticket.driver where busticket.departures.idbuses = busticket.buses.idbuses and busticket.departures.iddriver = busticket.driver.iddriver");
+			for(int i = 0; rs.next();i++) {
 				Object[] obj = new Object[7];
 				obj[0] = rs.getInt("iddepartures");
 				obj[1] = rs.getString("departure");
@@ -68,7 +66,6 @@ public class departure extends Main{
 				
 				model.addRow(obj);
 			}
-
 			rs.close();
 			mystat.close();
 		} catch (SQLException e) {
@@ -219,7 +216,7 @@ public class departure extends Main{
 		btnNewButton.setBounds(440, 370, 430, 60);
 		panel.add(btnNewButton);
 		
-
+		
 		
 	}
 
@@ -251,9 +248,19 @@ public class departure extends Main{
 				int sil = JOptionPane.showConfirmDialog(null,"bu sefri silmek istiyor musunuz?",null,JOptionPane.YES_NO_CANCEL_OPTION);
 				if(sil == 0) {
 					mystat = conn();
-					mystat.executeUpdate("delete from busticket.departures where iddepartures = '"+iddeparture+"'");
-					yenile();
-					JOptionPane.showMessageDialog(null, "Sefer Silindi", "", JOptionPane.PLAIN_MESSAGE);
+					try {
+						mystat.executeUpdate("delete from busticket.departures where iddepartures = '"+iddeparture+"'");
+						JOptionPane.showMessageDialog(null, "Sefer Silindi", "", JOptionPane.PLAIN_MESSAGE);
+					}catch(SQLException e1) {
+						JOptionPane.showMessageDialog(null, "Sefer Silinemedi bu seferde rezervasyonu olan bir yolcu var", "", JOptionPane.PLAIN_MESSAGE);
+						
+					}finally {
+						yenile();
+					}
+						
+					
+					
+					
 					
 				}
 			}
@@ -262,4 +269,5 @@ public class departure extends Main{
 		}
 		
 	}
+
 }

@@ -7,6 +7,7 @@ import javax.swing.JTabbedPane;
 
 public class Entery extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	
